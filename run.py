@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from forms import ContatcForm
 from flask import abort,redirect,url_for,make_response
 app=Flask(__name__)
 
@@ -16,16 +17,24 @@ def aboutme():
 def gallery():
     return render_template("gallery.html")
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET','POST'])
 def contact():
-    return render_template("contact.html")
+    form = ContatcForm()
+
+    if request.method == 'POST':
+        return render_template('contactsuccess.html')
+    elif request.method == 'GET':
+        return render_template('contact.html', form=form)
+#    return render_template("contact.html")
+
+
 
 #errors
 @app.errorhandler(404)
 def not_found_error(e):
     return render_template('404.html'), 404
 
-
+app.secret_key = '289304jkdhfasd08f87sdayfasd89ufjsadfus'
 if __name__ == '__main__':
     app.run(debug=False)
 
