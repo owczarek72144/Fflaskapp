@@ -1,7 +1,10 @@
+import os
+
 from flask import Flask
 from flask import request
 from flask import render_template
 from forms import ContatcForm
+from flask import send_from_directory
 from flask import abort,redirect,url_for,make_response
 app=Flask(__name__)
 
@@ -27,7 +30,10 @@ def contact():
         return render_template('contact.html', form=form)
 #    return render_template("contact.html")
 
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 #errors
 @app.errorhandler(404)
