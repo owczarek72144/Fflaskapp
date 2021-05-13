@@ -25,9 +25,10 @@ def contact():
     form = ContatcForm()
 
     if request.method == 'POST':
-        return render_template('contactsuccess.html')
+        data = "coś"
+        return render_template('contact_form/contactsuccess.html', data=data)
     elif request.method == 'GET':
-        return render_template('contact.html', form=form)
+        return render_template('contact_form/contact.html', form=form)
 #    return render_template("contact.html")
 
 @app.route('/favicon.ico')
@@ -38,7 +39,11 @@ def favicon():
 #errors
 @app.errorhandler(404)
 def not_found_error(e):
-    return render_template('404.html'), 404
+    return render_template('error_pages/404.html'), 404
+
+@app.errorhandler(500)
+def not_found_error(e):
+    return render_template('error_pages/500.html'), 500
 
 app.secret_key = '289304jkdhfasd08f87sdayfasd89ufjsadfus'
 if __name__ == '__main__':
