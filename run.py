@@ -5,6 +5,7 @@ from flask import request
 from flask import render_template
 from forms import ContatcForm
 from flask import send_from_directory
+from flask_mail import Mail, Message
 from flask import abort,redirect,url_for,make_response
 app=Flask(__name__)
 
@@ -25,8 +26,18 @@ def contact():
     form = ContatcForm()
 
     if request.method == 'POST':
-        data = "coś"
-        return render_template('contact_form/contactsuccess.html', data=data)
+        subject = request.form.get('subject')
+        name = request.form.get("name")
+        message = request.form.get('message')
+        email = request.form.get('email')
+        recipients = ['vassilli.zaitsev@gmail.com']
+        msg = Message(subject=subject,
+                      sender=app.config.get("MAIL_USERNAME"),
+                      recipients=recipients, # replace with your email for testing
+                      body="Message from: " + name + "\n" + "email: " + email + "\n" + "Message:"+ message)
+        mail.send(msg)
+
+        return render_template('contact_form/contactsuccess.html')
     elif request.method == 'GET':
         return render_template('contact_form/contact.html', form=form)
 #    return render_template("contact.html")
@@ -44,6 +55,17 @@ def not_found_error(e):
 @app.errorhandler(500)
 def not_found_error(e):
     return render_template('error_pages/500.html'), 500
+
+#email configuration
+app.config.update(
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME = 'vassilli.zaitsev@gmail.com',
+    MAIL_PASSWORD = 'tgxphhhryjroxoas'
+    )
+mail = Mail(app)
+
 
 app.secret_key = '289304jkdhfasd08f87sdayfasd89ufjsadfus'
 if __name__ == '__main__':
