@@ -31,11 +31,16 @@ def contact():
         message = request.form.get('message')
         email = request.form.get('email')
         recipients = ['vassilli.zaitsev@gmail.com']
-        msg = Message(subject=subject,
+        mesageToMe = Message(subject=subject,
                       sender=app.config.get("MAIL_USERNAME"),
                       recipients=recipients, # replace with your email for testing
                       body="Message from: " + name + "\n" + "email: " + email + "\n" + "Message:"+ message)
-        mail.send(msg)
+        messageToSender = Message(subject="Dziękuje za wysłanie wiadomośći",
+                      sender=app.config.get("MAIL_USERNAME"),
+                      recipients=list(email.split(" ")), # replace with your email for testing
+                      body="Dziękuję za wiadomość, wkrótce odpiszę")
+        mail.send(mesageToMe)
+        mail.send(messageToSender)
 
         return render_template('contact_form/contactsuccess.html')
     elif request.method == 'GET':
