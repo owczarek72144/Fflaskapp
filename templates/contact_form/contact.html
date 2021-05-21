@@ -16,9 +16,6 @@
 
 <div class="content">
     {% block content %}
-        {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
     <h1>Wyslij wiadomość!</h1>
     <form action="{{ url_for('contact') }}" method="post">
 
