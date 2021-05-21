@@ -9,7 +9,7 @@ from wtforms import SubmitField
 
 class ContatcForm(FlaskForm):
     name = TextField("Imię", [validators.required()])
-    email = TextField("Email", validators=[DataRequired()])
+    email = TextField("Email", validators=[validators.required(), Email()])
     subject = TextField("Temat", [validators.required()])
     message = TextAreaField("Tekst wiadomosci:", [validators.required()])
     submit = SubmitField("Wyślij")

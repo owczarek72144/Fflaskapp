@@ -6,6 +6,7 @@ from flask import render_template
 from forms import ContatcForm
 from flask import send_from_directory
 from flask_mail import Mail, Message
+from email_validator import validate_email, EmailNotValidError
 from flask import abort,redirect,url_for,make_response
 app=Flask(__name__)
 
@@ -24,12 +25,20 @@ def gallery():
 @app.route('/contact', methods=['GET','POST'])
 def contact():
     form = ContatcForm()
+    message=''
 
     if request.method == 'POST':
+        email = request.form.get('email')
+        try:
+            validate_email(email)
+        except EmailNotValidError as e:
+            message = ('email', 'Nieprawidłowy adres mailowy')
+            return render_template('contact_form/contact.html', form=form, message=message)
+
         subject = request.form.get('subject')
         name = request.form.get("name")
         message = request.form.get('message')
-        email = request.form.get('email')
+
         recipients = ['vassilli.zaitsev@gmail.com']
         mesageToMe = Message(subject=subject,
                       sender=app.config.get("MAIL_USERNAME"),
@@ -44,8 +53,7 @@ def contact():
 
         return render_template('contact_form/contactsuccess.html')
     elif request.method == 'GET':
-        return render_template('contact_form/contact.html', form=form)
-#    return render_template("contact.html")
+        return render_template('contact_form/contact.html', form=form, message=message)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -67,7 +75,7 @@ app.config.update(
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
     MAIL_USERNAME = 'vassilli.zaitsev@gmail.com',
-    MAIL_PASSWORD = 'tgxphhhryjroxoas'
+    MAIL_PASSWORD = 'qplzxmdxmzakrwei'
     )
 mail = Mail(app)
 

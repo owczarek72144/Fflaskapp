@@ -16,13 +16,20 @@
 
 <div class="content">
     {% block content %}
+        {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
     <h1>Wyslij wiadomość!</h1>
     <form action="{{ url_for('contact') }}" method="post">
+
         {{ form.hidden_tag() }}
 
         {{ form.name.label }}
         {{ form.name }}
 
+        {% if message[0] == 'email' %}
+                <p style="color:red">{{ message[1] }}</p>
+        {% endif %}
         {{ form.email.label }}
         {{ form.email }}
 
