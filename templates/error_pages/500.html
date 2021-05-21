@@ -1,3 +1,27 @@
-<h1>Nie znaleziono strony</h1>
-  <p>Internal Server Error.</p>
- <p><a href="{{url_for('home')}}">Kliknij tutaj</a> aby wrócić na stronę główną</p>
+<style>
+.content {
+  max-width: 900px;
+  margin: auto;
+}
+h1 {
+  display: block;
+  font-size: 3em;
+  color:red;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+p {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+}
+</style>
+<div class="content">
+<h1>500 - Błąd serwera - spróbuj później!</h1>
+
+  <p>Wystąpił błąd serwera,skontaktuj się z administratorem</p>
+ <p><a href="{{url_for('home')}}">Kliknij tutaj</a> aby wrócić na stronę główną.</p>
+</div>
