@@ -68,12 +68,12 @@ def favicon():
 
 # errors
 @app.errorhandler(404)
-def not_found_error():
+def not_found_error(e):
     return render_template('error_pages/404.html'), 404
 
 
 @app.errorhandler(500)
-def not_found_error():
+def not_found_error(e):
     return render_template('error_pages/500.html'), 500
 
 
