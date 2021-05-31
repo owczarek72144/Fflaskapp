@@ -42,7 +42,7 @@ def contact():
         subject = request.form.get('subject')
         name = request.form.get("name")
         message = request.form.get('message')
-
+        print(message)
         recipients = ['vassilli.zaitsev@gmail.com']
         mesage_to_admin = Message(subject=subject,
                                   sender=app.config.get("MAIL_USERNAME"),

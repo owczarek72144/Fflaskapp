@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About me</title>
-</head>
-<body>
-<nav>
-    <a href="{{url_for('home')}}">Home</a>
-    <a href="{{url_for('aboutme')}}">About me</a>
-    <a href="{{url_for('gallery')}}">Gallery</a>
-    <a href="{{url_for('contact')}}">Contact</a>
+{% extends "/base/base.html" %}
+{% set active_page = "aboutme" %}
+{% block title %} About Me {% endblock %}
+            {% block body %}
 
-</nav>
-<div class="content">
+
     <h1>Hej, jestem Mateusz a oto moja strona</h1>
     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum, mauris ut euismod lacinia, mi nunc suscipit lorem, consequat mattis elit libero sit amet ligula. In tellus arcu, luctus ut pharetra id, finibus nec dui. Etiam congue maximus leo. Mauris tincidunt urna eros, id rhoncus enim iaculis vel. Phasellus elit ex, auctor tincidunt nulla ac, interdum fringilla elit. Nam nulla tellus, suscipit in purus sit amet, faucibus imperdiet eros. Aliquam vestibulum lacus imperdiet, aliquet mauris a, pellentesque purus. Donec congue sagittis tempus. Duis commodo lorem non libero rutrum, ut tristique eros vehicula. Fusce dignissim nunc sit amet venenatis vulputate. Duis ornare et massa vitae commodo. Nulla suscipit massa lacinia ligula facilisis, a laoreet urna dapibus.
 
@@ -20,6 +11,4 @@ Pellentesque iaculis risus orci, vitae lacinia lacus consequat non. Morbi in neq
 
 Nunc eu congue mi. Quisque efficitur eros dui, nec porttitor purus consequat sed. Fusce sem massa, ullamcorper at turpis ac, aliquet bibendum odio. Nullam consequat eu ex nec viverra. Donec vitae sagittis ligula. Sed elementum felis urna, eget laoreet nunc faucibus nec. Mauris accumsan faucibus turpis, eget semper tellus consectetur quis. Integer eget scelerisque sapien, volutpat lacinia nisi. Integer sollicitudin leo urna. Fusce imperdiet vitae tortor et rhoncus. Ut eu quam dictum, molestie augue nec, bibendum mauris. Mauris rutrum nisi sed dolor molestie lobortis. Integer sit amet ex id erat dignissim tincidunt vitae nec ipsum. Vestibulum vitae risus eu eros bibendum porttitor. Praesent scelerisque viverra nulla, et vehicula sapien cursus eu. Sed massa nulla, egestas vitae facilisis vel, dictum a nulla. </p>
 
-</div>
-
-</body>
+{% endblock %}

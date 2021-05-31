@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gallery</title>
-</head>
-<body>
-<nav>
-    <a href="{{url_for('home')}}">Home</a>
-    <a href="{{url_for('aboutme')}}">About me</a>
-    <a href="{{url_for('gallery')}}">Gallery</a>
-    <a href="{{url_for('contact')}}">Contact</a>
-
-</nav>
-<div class="content">
+{% extends "/base/base.html" %}
+{% set active_page = "gallery" %}
+{% block title %} Gallery {% endblock %}
+{% block body %}
     <h1>Fajne zdjęcia</h1>
     <img src="{{ url_for('static', filename='graphics/Lena.jpg') }}" alt="Lena"><br>
     <img src="{{ url_for('static', filename='graphics/wir.jpg') }}" alt="kwiaty"><br>
-
-
-</div>
-
-</body>
+{% endblock %}
