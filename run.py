@@ -3,6 +3,8 @@ import os
 from flask import Flask
 from flask import request
 from flask import render_template
+
+from AzureDB import AzureDB
 from forms import ContatcForm
 from flask import send_from_directory
 from flask_mail import Mail, Message
@@ -25,6 +27,12 @@ def aboutme():
 def gallery():
     return render_template("gallery.html")
 
+@app.route('/db')
+def db():
+    with AzureDB() as a:
+        dt = a.azureGetAllData();
+        print(dt)
+        return str(dt)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
