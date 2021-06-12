@@ -33,9 +33,7 @@ body {
   width: 25%;
 
 }
-.row{
-  margin:0;
-}
+
 #myImg {
   border-radius: 5px;
   cursor: pointer;
@@ -123,4 +121,8 @@ body {
   .modal-content {
     width: 100%;
   }
+}
+.form_margin{
+  margin:0 !important;
+  padding: 0 !important;
 }
