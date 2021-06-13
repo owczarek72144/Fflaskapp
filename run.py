@@ -48,7 +48,6 @@ def deleteentry():
 def editentry():
     if request.method == 'POST':
         id = request.form.get('id')
-        print(id)
         with AzureDB() as getrecord:
             result = getrecord.azureGetRecord(id)
             form = AddComment()
@@ -61,7 +60,6 @@ def updateentry():
         id = request.form.get('id')
         name = request.form.get('name')
         message = request.form.get('message')
-
         with AzureDB() as update:
             update.auzreUpdateEntry(id,name,message)
             return guestbook()
@@ -96,7 +94,6 @@ def contact():
         subject = request.form.get('subject')
         name = request.form.get("name")
         message = request.form.get('message')
-        print(message)
         recipients = ['vassilli.zaitsev@gmail.com']
         mesage_to_admin = Message(subject=subject,
                                   sender=app.config.get("MAIL_USERNAME"),
