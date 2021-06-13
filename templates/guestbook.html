@@ -20,11 +20,11 @@
                 <footer class="blockquote-footer">Data wpisu: <cite title="{{result.date}}">{{result.date}}</cite></footer>
             </blockquote>
             <div class="d-grid gap-2 d-md-block" >
-                <form action="editentry" method="POST" style="display: inline-block">
+                <form action="/editentry" method="POST" style="display: inline-block">
                     <input type="hidden" name="id" value="{{result.entryid}}">
                     <input class="btn btn-outline-secondary" type="submit" value="Edytuj wpis">
                 </form>
-                <form action="deleteentry" method="POST" style="display: inline-block">
+                <form action="/deleteentry" method="POST" style="display: inline-block">
                     <input type="hidden" name="id" value="{{result.entryid}}">
                     <input class="btn btn-outline-secondary" type="submit" value="Usuń wpis">
                 </form>
