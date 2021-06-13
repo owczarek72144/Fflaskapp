@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 
 from flask import Flask
@@ -73,9 +74,10 @@ def addcomment():
     if request.method == 'POST':
         name = request.form.get('name')
         message = request.form.get('message')
+        currenttime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         with AzureDB() as send_data:
-            send_data.azureAddData(name, message)
-        return render_template('contact_form/success.html', message="Zapisano komentarz")
+            send_data.azureAddData(name, message,currenttime)
+        return render_template('contact_form/success.html', message=currenttime)
 
 
 @app.route('/contact', methods=['GET', 'POST'])

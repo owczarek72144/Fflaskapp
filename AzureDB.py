@@ -1,4 +1,4 @@
-from datetime import datetime
+
 
 import pypyodbc
 import azurecred
@@ -31,8 +31,7 @@ class AzureDB:
             print(exception)
             exit(1)
 
-    def azureAddData(self, name, message):
-        currenttime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    def azureAddData(self, name, message,currenttime):
         self.curosr.execute(f"INSERT into guestbook(name,text,date) values('{name}','{message}','{currenttime}')")
         self.conn.commit()
 
