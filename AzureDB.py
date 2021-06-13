@@ -31,10 +31,25 @@ class AzureDB:
             print(exception)
             exit(1)
 
-    def azureAddData(self):
+    def azureAddData(self, name, message):
         currenttime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        self.curosr.execute(f"INSERT into guestbook(name,text,date) values('Mateusz','Świetna stronka','{currenttime}')")
+        self.curosr.execute(f"INSERT into guestbook(name,text,date) values('{name}','{message}','{currenttime}')")
         self.conn.commit()
 
+    def azureDeleteEntry(self, id):
+        self.curosr.execute(f"DELETE FROM guestbook WHERE entryid ='{id}'")
+        self.conn.commit()
 
+    def auzreUpdateEntry(self,id, name,message):
+        self.curosr.execute(f"UPDATE guestbook SET name='{name}',text='{message}' WHERE entryid='{id}'")
+        self.conn.commit()
 
+    def azureGetRecord(self,id):
+        try:
+            self.curosr.execute(f"SELECT * from guestbook WHERE entryid = {id}")
+            entry = self.curosr.fetchall()
+            return entry
+        except pypyodbc.DatabaseError as exception:
+            print('Failed to execute query')
+            print(exception)
+            exit(1)

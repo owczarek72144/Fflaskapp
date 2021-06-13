@@ -13,3 +13,9 @@ class ContatcForm(FlaskForm):
     subject = TextField("Temat", [validators.required()])
     message = TextAreaField("Tekst wiadomosci:", [validators.required()])
     submit = SubmitField("Wyślij")
+
+class AddComment(FlaskForm):
+    name = TextField("Imię",[validators.required()])
+    message = TextAreaField("Wiadomość",[validators.required()])
+    submit = SubmitField("Wyślij komentarz")
+    update = SubmitField("Aktualizuj komentarz")

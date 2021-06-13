@@ -5,7 +5,7 @@ from flask import request
 from flask import render_template
 
 from AzureDB import AzureDB
-from forms import ContatcForm
+from forms import ContatcForm, AddComment
 from flask import send_from_directory
 from flask_mail import Mail, Message
 from email_validator import validate_email, EmailNotValidError
@@ -27,12 +27,58 @@ def aboutme():
 def gallery():
     return render_template("gallery.html")
 
-@app.route('/db')
-def db():
+
+@app.route('/guestbook')
+def guestbook():
     with AzureDB() as a:
-        dt = a.azureGetAllData();
-        print(dt)
-        return str(dt)
+        data = a.azureGetAllData();
+        return render_template("guestbook.html", data=data)
+
+
+@app.route('/deleteentry', methods=['POST'])
+def deleteentry():
+    if request.method == 'POST':
+        id = request.form.get('id')
+        with AzureDB() as delete:
+            delete.azureDeleteEntry(id)
+            return guestbook()
+
+
+@app.route('/editentry', methods=['POST', 'GET'])
+def editentry():
+    if request.method == 'POST':
+        id = request.form.get('id')
+        print(id)
+        with AzureDB() as getrecord:
+            result = getrecord.azureGetRecord(id)
+            form = AddComment()
+            form.message.data = result[0][2]
+            return render_template('addcomment.html', form=form, editItem=True, result=result)
+
+@app.route('/update', methods=['POST'])
+def updateentry():
+    if request.method == 'POST':
+        id = request.form.get('id')
+        name = request.form.get('name')
+        message = request.form.get('message')
+
+        with AzureDB() as update:
+            update.auzreUpdateEntry(id,name,message)
+            return guestbook()
+
+@app.route('/addcomment', methods=['GET', 'POST'])
+def addcomment():
+    form = AddComment()
+    if request.method == 'GET':
+        return render_template('addcomment.html', form=form, editItem=False)
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        message = request.form.get('message')
+        with AzureDB() as send_data:
+            send_data.azureAddData(name, message)
+        return render_template('contact_form/success.html', message="Zapisano komentarz")
+
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -63,7 +109,7 @@ def contact():
         mail.send(mesage_to_admin)
         mail.send(message_to_sender)
 
-        return render_template('contact_form/contactsuccess.html')
+        return render_template('contact_form/success.html', message="Wysłano wiadomość")
     elif request.method == 'GET':
         return render_template('contact_form/contact.html', form=form, message=message)
 

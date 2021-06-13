@@ -1,0 +1,39 @@
+{% extends "/base/base.html" %}
+{% set active_page = "aboutme" %}
+{% block title %} Guestbook {% endblock %}
+            {% block body %}
+<div class="text-center">
+<h1>Księga gości</h1>
+    <div class="m-2">
+        <form action="addcomment" method="GET">
+            <input class="btn btn-outline-secondary" type="submit" value="Dodaj wpis">
+        </form>
+    </div>
+    {% for result in data %}
+
+    <div class="card">
+        <h5 class="card-header">Imię: {{result.name}} </h5>
+        <div class="card-body">
+            <h5 class="card-title">Wiadomość:</h5>
+            <p class="card-text">{{result.text}}</p>
+            <blockquote class="blockquote mb-0">
+                <footer class="blockquote-footer">Data wpisu: <cite title="{{result.date}}">{{result.date}}</cite></footer>
+            </blockquote>
+            <div class="d-grid gap-2 d-md-block" >
+                <form action="editentry" method="POST" style="display: inline-block">
+                    <input type="hidden" name="id" value="{{result.entryid}}">
+                    <input class="btn btn-outline-secondary" type="submit" value="Edytuj wpis">
+                </form>
+                <form action="deleteentry" method="POST" style="display: inline-block">
+                    <input type="hidden" name="id" value="{{result.entryid}}">
+                    <input class="btn btn-outline-secondary" type="submit" value="Usuń wpis">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>Brak wpisów</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
