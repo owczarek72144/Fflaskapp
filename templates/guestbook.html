@@ -13,20 +13,20 @@
     {{result}}
 
     <div class="card">
-        <h5 class="card-header">Imię: {{result.name}} </h5>
+        <h5 class="card-header">Imię: {{result[1]}} </h5>
         <div class="card-body">
             <h5 class="card-title">Wiadomość:</h5>
-            <p class="card-text">{{result.text}}</p>
+            <p class="card-text">{{result[2]}}</p>
             <blockquote class="blockquote mb-0">
-                <footer class="blockquote-footer">Data wpisu: <cite title="{{result.date}}">{{result.date}}</cite></footer>
+                <footer class="blockquote-footer">Data wpisu: <cite title="{{result.date}}">{{result[3]}}</cite></footer>
             </blockquote>
             <div class="d-grid gap-2 d-md-block" >
                 <form action="/editentry" method="POST" style="display: inline-block">
-                    <input type="hidden" name="id" value="{{result.entryid}}">
+                    <input type="hidden" name="id" value="{{result[0]}}">
                     <input class="btn btn-outline-secondary" type="submit" value="Edytuj wpis">
                 </form>
                 <form action="/deleteentry" method="POST" style="display: inline-block">
-                    <input type="hidden" name="id" value="{{result.entryid}}">
+                    <input type="hidden" name="id" value="{{result[0]}}">
                     <input class="btn btn-outline-secondary" type="submit" value="Usuń wpis">
                 </form>
             </div>
