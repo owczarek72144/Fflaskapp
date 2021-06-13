@@ -21,11 +21,11 @@
             <div class="d-grid gap-2 d-md-block" >
                 <form action="/editentry" method="POST" style="display: inline-block">
                     <input type="hidden" name="id" value="{{result[0]}}">
-                    <input class="btn btn-outline-secondary" type="submit" value="Edytuj wpis">
+                    <input class="btn btn-warning" type="submit" value="Edytuj wpis">
                 </form>
                 <form action="/deleteentry" method="POST" style="display: inline-block">
                     <input type="hidden" name="id" value="{{result[0]}}">
-                    <input class="btn btn-outline-secondary" type="submit" value="Usuń wpis">
+                    <input class="btn btn- btn-danger" type="submit" value="Usuń wpis">
                 </form>
             </div>
         </div>

@@ -77,7 +77,7 @@ def addcomment():
         currenttime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         with AzureDB() as send_data:
             send_data.azureAddData(name, message,currenttime)
-        return render_template('contact_form/success.html', message=currenttime)
+        return render_template('contact_form/success.html', message="Dodano wpis do księgi gości")
 
 
 @app.route('/contact', methods=['GET', 'POST'])
